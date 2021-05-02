@@ -1,6 +1,6 @@
 import app from  './app'
-import './database'
+import './mongodatabase'
 
-app.listen(3000,()=>{
-    console.log('server on port 3000')
+app.listen(app.get('port'),()=>{
+    console.log('server on port', app.get('port'))
 })
