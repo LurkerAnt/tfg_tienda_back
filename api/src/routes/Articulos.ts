@@ -4,7 +4,8 @@ const articuloSchema = new Schema({
     nombre: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
      },
      tipo: {
          type: String,
@@ -14,6 +15,10 @@ const articuloSchema = new Schema({
     color: {
         type: String,
         required: true
+    },
+    url:{
+        type: String,
+        required:true
     },
     existencias: {
         type: Boolean,

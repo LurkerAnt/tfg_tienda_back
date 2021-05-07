@@ -1,31 +1,39 @@
 @api = http://localhost:3000
 
-54:50
+
 
 GET http://localhost:3000/articulos
 
+### obtener solo 1 articulo  by id
+GET http://localhost:3000/articulos/6094512c3fbfaa5bb4fce1ab
+
 ###
+put http://localhost:3000/articulos/6094512c3fbfaa5bb4fce1ab
+Content-Type: application/json
 
-GET http://localhost:3000/articulos/1
+{
 
-###
-put http://localhost:3000/articulos/1
-
-### crear video
+    "color":"negro",
+    "precio": {
+        "$numberDecimal":"20.00"
+    }
+}
+### crear articulo
 
 POST {{api}}/articulos
 Content-Type: application/json
 
 {
-   "nombre": "Black Hanya",
-    "tipo": "sudadera",
-    "color": "negro",
+   "nombre": "icosaedro resina brillante",
+    "tipo": "dado",
+    "color": "azul",
+    "url": "www://imgur.com",
     "existencias": true,
-    "precio": {
-        "$numberDecimal": "39.90"
-    },
+    "precio":  10.00,
     "oferta": true
 }
 
+### delete articulo
+DELETE {{api}}/articulos/6094514b3fbfaa5bb4fce1ac
 
 

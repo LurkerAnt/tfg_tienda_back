@@ -1,7 +1,7 @@
 import{Router} from 'express'
 const router = Router();
 
-import * as articulosController from './Articulos.controller'
+import * as articulosController from './articulos.controller'
 
 router.get('/articulos', articulosController.getArticulos);
 
