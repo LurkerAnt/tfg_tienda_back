@@ -14,7 +14,7 @@ import mongoose,{ ConnectionOptions } from 'mongoose'
     //estas dos lineas son para que no salte una advertencia de deprecation Warning
     /*mongoose.set('useNewUrlParser',true);
     mongoose.set('useCreateIndex',true);*/
-    const db = await mongoose.connect('mongodb://localhost/tienda',mongooseOptions);
+    const db = await mongoose.connect('mongodb://localhost/tienda', mongooseOptions);
         console.log('connected to:', db.connection.name)
    } catch (error) {
        console.error(error)

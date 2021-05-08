@@ -2,10 +2,9 @@ import{RequestHandler} from 'express'
 import Articulo from './articulos'
 
 export const createArticulo: RequestHandler = async (req,res) => {
-    const articulofound= await Articulo.findOne({nombre: req.body.nombre})
+    const articulofound = await Articulo.findOne({nombre: req.body.nombre})
     if(articulofound)
         return res.status(301).json({message:'El articulo ya existe'})
-
     const articulo = new Articulo(req.body);
     const savedarticulo = await articulo.save();
     console.log(articulo);

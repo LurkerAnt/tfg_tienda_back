@@ -8,7 +8,7 @@ GET http://localhost:3000/articulos
 GET http://localhost:3000/articulos/6094512c3fbfaa5bb4fce1ab
 
 ###
-put http://localhost:3000/articulos/6094512c3fbfaa5bb4fce1ab
+PUT http://localhost:3000/articulos/"6095920207d90033a8c4e2d0
 Content-Type: application/json
 
 {
@@ -24,12 +24,12 @@ POST {{api}}/articulos
 Content-Type: application/json
 
 {
-   "nombre": "icosaedro resina brillante",
-    "tipo": "dado",
-    "color": "azul",
+    "nombre": "raton gaming",
+    "tipo": "periferico",
+    "color": "negro",
     "url": "www://imgur.com",
     "existencias": true,
-    "precio":  10.00,
+    "precio":  90.00,
     "oferta": true
 }
 
