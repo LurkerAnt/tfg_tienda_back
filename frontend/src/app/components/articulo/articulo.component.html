@@ -1,14 +1,80 @@
+<div class="container">
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4 mt-1">
         <div class="card">
             <div class="card-body">
-                <h1>
-                    formulario
-                </h1>
+                <form #articuloForm="ngForm">
+                    <h3>
+                        Registro de Articulos
+                    </h3>
+                    <input type="hidden" name="_id" [(ngModel)]="articuloService.formArticulo._id">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="articuloService.formArticulo.nombre">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Tipo" name="tipo" [(ngModel)]="articuloService.formArticulo.tipo">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Color" name="color" [(ngModel)]="articuloService.formArticulo.color">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Url" name="url" [(ngModel)]="articuloService.formArticulo.url">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="existencias" name="existencias" [(ngModel)]="articuloService.formArticulo.existencias">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="articuloService.formArticulo.precio">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Oferta" name="oferta" [(ngModel)]="articuloService.formArticulo.oferta">
+                    </div>
+                    <div class="mt-2 p-2">
+                        <button class="btn btn-success m-1" (click)="addArticulo(articuloForm)">
+                            Enviar
+                        </button>
+                        <button class="btn btn-primary" (click)="resetForm(articuloForm)">
+                            Limpiar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-md-8">
-            
+            <table class="table table-stipped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Color</th>
+                        <th>Url</th>
+                        <th>Existencias</th>
+                        <th>Precio</th>
+                        <th>Oferta</th>
+                    </tr>
+                </thead>
+                <tr *ngFor="let articulo of articuloService.articulos">
+                    <td>{{articulo.nombre}}</td>
+                    <td>{{articulo.tipo}}</td>
+                    <td>{{articulo.color}}</td>
+                    <td>{{articulo.url}}</td>
+                    <td>{{articulo.existencias}}</td>
+                    <td>{{articulo.precio.$numberDecimal}}</td>
+                    <td>{{articulo.oferta}}</td>
+                    <td>
+                        <div>
+                            <button class="btn btn-warning btn-sm" (click)="editArticulo(articulo)">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteArticulo(articulo._id)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
+</div>
 </div>
