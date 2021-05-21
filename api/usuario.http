@@ -11,7 +11,7 @@ Content-Type: application/json
 
 {
     "nombre": "manuel",
-    "password": "test2",
+    "password": "test4",
     "apellido": "gonzalez",
     "email": "prueba@gmail.com",
     "fecha": "1998-09-22",
@@ -33,4 +33,14 @@ Content-Type: application/json
     "email": "prueba@gmail.com",
     "fecha": 1998-09-22,
     "admin": false,
+}
+
+###
+
+PUT {{api}}/changePassword/1
+
+Content-Type: application/json
+
+{
+    "password":"batman"
 }

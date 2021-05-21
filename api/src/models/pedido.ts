@@ -6,6 +6,11 @@ const pedidoSchema = new Schema({
     unique: true,
     require: true,
   },
+  direccion:{
+    type: String,
+    unique: true,
+    require:true,
+  },
   articulos: {
     type: [{ Articulo }],
     unique: true,

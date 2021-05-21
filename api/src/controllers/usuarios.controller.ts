@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { TimeoutError } from "sequelize/types";
 import { sequelize } from "../dbpostgredatabase";
 import { Usuario } from "../models/usuario.sequelize";
 
@@ -106,6 +107,7 @@ export const updateUsuario = async (req: Request, res: Response) => {
   }
 };
 
+/*
 export const cambiarPassword = async (req: Request, res: Response) =>{
     const {id} = req.params;
     const { password } = req.body;
@@ -115,8 +117,9 @@ export const cambiarPassword = async (req: Request, res: Response) =>{
             attributes:['password'],
             where:{id}
         });
-
+        
         const newPassword = await oldPassword?.update({
+            id,
             password
         },
         {
@@ -125,6 +128,29 @@ export const cambiarPassword = async (req: Request, res: Response) =>{
         res.json(newPassword);
          console.log('Contraseña cambiada');
     } catch(error){
+        console.log(error);
         console.log('no se ha podido cambiar la contraseña');
     }
+}*/
+
+export const cambiarPassword = async (req: Request, res: Response)=>{
+  const {id} = req.params;
+  const { password } = req.body;
+  try{
+      
+      await Usuario.update({
+        password:password     
+      },    
+      {
+        where: {id},  
+      });
+      
+       res.json({
+         password,
+         message: "contraseña cambiada",
+       });
+  } catch(error){
+        console.log(error);
+     }
+
 }
