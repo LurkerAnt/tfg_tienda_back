@@ -34,3 +34,13 @@ Content-Type: application/json
     "fecha": 1998-09-22,
     "admin": false,
 }
+
+###
+
+PUT {{api}}/changePassword/1
+
+Content-Type: application/json
+
+{
+    "password":"test3"
+}
