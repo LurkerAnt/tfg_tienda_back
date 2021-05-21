@@ -8,7 +8,7 @@ import { Articulo } from '../models/articulo';
 export class ArticuloService {
 
   
-  URL_API = 'http://localhost:3000/articulos'
+URL_API = 'http://localhost:3000/articulos'
   
  //array de articulos para almacenar la peticion get con todos los datos
   articulos: Articulo[];
@@ -19,7 +19,7 @@ export class ArticuloService {
     color:'',
     url:'',
     existencias:true,
-    precio:0,
+    precio:[],
     oferta:true
   };
   

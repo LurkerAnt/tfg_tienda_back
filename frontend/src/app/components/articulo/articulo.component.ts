@@ -35,7 +35,6 @@ export class ArticuloComponent implements OnInit {
       this.articuloService.updateArticulo(form.value).subscribe(
         res => console.log(res),
         err => console.error(err)
-
       );    
     }
 

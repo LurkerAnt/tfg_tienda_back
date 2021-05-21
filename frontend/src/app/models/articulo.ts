@@ -1,3 +1,5 @@
+import { precio } from "./precio";
+
 export interface Articulo{
     _id?: string
     nombre: string
@@ -5,6 +7,6 @@ export interface Articulo{
     color: string
     url: string
     existencias: boolean
-    precio: number
+    precio: Array<precio> 
     oferta: boolean
 }
