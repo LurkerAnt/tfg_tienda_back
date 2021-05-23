@@ -1,0 +1,39 @@
+@api = http://localhost:3000
+
+
+
+GET http://localhost:3000/articulos
+
+### obtener solo 1 articulo  by id
+GET http://localhost:3000/articulos/6094512c3fbfaa5bb4fce1ab
+
+###
+PUT http://localhost:3000/articulos/"6095920207d90033a8c4e2d0
+Content-Type: application/json
+
+{
+
+    "color":"negro",
+    "precio": {
+        "$numberDecimal":"20.00"
+    }
+}
+### crear articulo
+
+POST {{api}}/articulos
+Content-Type: application/json
+
+{
+    "nombre": "raton gaming",
+    "tipo": "periferico",
+    "color": "negro",
+    "url": "www://imgur.com",
+    "existencias": true,
+    "precio":  90.00,
+    "oferta": true
+}
+
+### delete articulo
+DELETE {{api}}/articulos/6094514b3fbfaa5bb4fce1ac
+
+

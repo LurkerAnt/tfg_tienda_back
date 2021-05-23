@@ -1,0 +1,46 @@
+@api = http://localhost:3000
+
+GET http://localhost:3000/usuarios
+
+###
+GET http://localhost:3000/usuario/1
+###
+
+PUT http://localhost:3000/usuario/1
+Content-Type: application/json
+
+{
+    "nombre": "manuel",
+    "password": "test2",
+    "apellido": "gonzalez",
+    "email": "prueba@gmail.com",
+    "fecha": "1998-09-22",
+    "admin": false
+}
+
+###
+DELETE http://localhost:3000/usuario/6
+
+###
+POST {{api}}/usuario/signUp
+
+Content-Type: application/json
+
+{   
+    "nombre": "jesus",
+    "password": "test2",
+    "apellido": "gonzalez",
+    "email": "prueba@gmail.com",
+    "fecha": 1998-09-22,
+    "admin": false,
+}
+
+###
+
+PUT {{api}}/changePassword/1
+
+Content-Type: application/json
+
+{
+    "password":"test3"
+}
