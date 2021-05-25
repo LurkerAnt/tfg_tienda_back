@@ -36,8 +36,7 @@ export const createUsuario = async (req: Request, res: Response) => {
   let { nombre, password, apellido, email, fecha, admin } = req.body;
   try {
 
-      let hash = bcrypt.hashSync(password, 8);
-      password = hash;
+      
     let newUsuario = await Usuario.create({
       nombre: nombre,
       password: password,
@@ -138,8 +137,7 @@ export const cambiarPassword = async (req: Request, res: Response)=>{
   let { password } = req.body;
   try{
 
-    let hash = bcrypt.hashSync(password, 8);
-    password=hash;
+    
       await Usuario.update({
         password:password     
       },    

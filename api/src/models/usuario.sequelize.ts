@@ -20,6 +20,10 @@ export const Usuario = sequelize.define(
     password: {
       type: Sequelize.STRING,
       allowNull: false,
+      set(value: string) {
+        const hash = bcrypt.hashSync(value, 8);
+        this.setDataValue("password", hash);
+      },
     },
 
     apellido: {
@@ -37,10 +41,10 @@ export const Usuario = sequelize.define(
     },
     admin: {
       type: Sequelize.BOOLEAN,
-      defaultValue:false
+      defaultValue: false,
     },
   },
-    
+
   {
     timestamps: false,
     createdAt: false,
