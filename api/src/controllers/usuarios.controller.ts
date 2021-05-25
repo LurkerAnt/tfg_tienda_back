@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { TimeoutError } from "sequelize/types";
 import { sequelize } from "../dbpostgredatabase";
 import { Usuario } from "../models/usuario.sequelize";
+import bcrypt from "bcrypt";
+import { any } from "sequelize/types/lib/operators";
 
 export const getUsuario = async (req: Request, res: Response) => {
   try{
@@ -16,12 +18,7 @@ export const getUsuario = async (req: Request, res: Response) => {
     console.log('error al conseguir el usuario');
   }
 }
-/*
-export const getUsuarios = async (req: Request, res: Response) => {
-  const response = await sequelize.query("SELECT * FROM usuarios");
-  res.send(response);
-};
-*/
+
 
 export const getUsuarios = async (req: Request, res: Response) =>{
   try{
@@ -36,10 +33,12 @@ export const getUsuarios = async (req: Request, res: Response) =>{
   }
 }
 export const createUsuario = async (req: Request, res: Response) => {
-  const { nombre, password, apellido, email, fecha, admin } = req.body;
+  let { nombre, password, apellido, email, fecha, admin } = req.body;
   try {
+
+      let hash = bcrypt.hashSync(password, 8);
+      password = hash;
     let newUsuario = await Usuario.create({
-      
       nombre: nombre,
       password: password,
       apellido: apellido,
@@ -47,6 +46,7 @@ export const createUsuario = async (req: Request, res: Response) => {
       fecha: fecha,
       admin: admin,
     });
+
     if (newUsuario) 
         res.json({message: 'Usuario registrado correctamente',
           data: newUsuario});
@@ -135,9 +135,11 @@ export const cambiarPassword = async (req: Request, res: Response) =>{
 
 export const cambiarPassword = async (req: Request, res: Response)=>{
   const {id} = req.params;
-  const { password } = req.body;
+  let { password } = req.body;
   try{
-      
+
+    let hash = bcrypt.hashSync(password, 8);
+    password=hash;
       await Usuario.update({
         password:password     
       },    
@@ -153,4 +155,25 @@ export const cambiarPassword = async (req: Request, res: Response)=>{
         console.log(error);
      }
 
+}
+
+export const signUp = async (req: Request, res: Response) => {
+  let{nombre,password, email,fecha} = req.body;
+  if(!req.body.email || !req.body.password) {
+    return res.status(400).json({msg: 'Por favor introduce email y contraseña'})
+  }
+   const usuarioRegistrado = await Usuario.findOne({
+      where:{
+        email,
+      }
+    });
+    if(usuarioRegistrado){
+      res.json({
+        message:'email en uso'
+      })
+    }
+    else{
+
+    }
+  res.send('recibido')
 }

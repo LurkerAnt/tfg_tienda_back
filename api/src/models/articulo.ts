@@ -35,6 +35,7 @@ const articuloSchema = new Schema({
 
 });
 
+
 export default model('Articulo',articuloSchema);
 
 
