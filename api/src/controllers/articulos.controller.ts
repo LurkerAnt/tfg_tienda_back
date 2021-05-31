@@ -8,31 +8,36 @@ export const createArticulo: RequestHandler = async (req,res) => {
     const articulo = new Articulo(req.body);
     const savedarticulo = await articulo.save();
     console.log(articulo);
-    res.json(savedarticulo);
-}
+   return res.json(savedarticulo);
+};
 export const getArticulos: RequestHandler = async (req,res) => {
     try {
         const articulos = await Articulo.find()
     return res.json(articulos); 
     } catch (error) {
-        res.json(error);
+     return res.json(error);
     }
-}
+};
 
 export const getArticulo: RequestHandler = async(req,res) => {
-    const articuloFound = await Articulo.findById(req.params.id)
-    if(!articuloFound) return res.status(204).json();
-     return res.json(articuloFound);
-}
+    try{
+        const articuloFound = await Articulo.findById(req.params.id);
+        if (!articuloFound) return res.status(204).json();
+        return res.json(articuloFound);
+    }catch(error){
+       return res.json(error);
+    }
+};
 
 export const updateArticulo: RequestHandler =  async(req,res) => {
-   const articuloUpdated = await Articulo.findByIdAndUpdate(req.params.id,req.body,{new:true})
-    if(!articuloUpdated) return res.status(204).json();
-   res.json(articuloUpdated)
-}
+   const articuloUpdated = 
+   await Articulo.findByIdAndUpdate(req.params.id,req.body,{new:true})
+    if(!articuloUpdated) return res.status(304).json();
+  return res.json(articuloUpdated)
+};
 
 export const deleteArticulo: RequestHandler = async (req,res) => {
      const articuloFound = await Articulo.findByIdAndDelete(req.params.id)
       if(!articuloFound) return res.status(204).json();
         return res.json(articuloFound);
-}
+};

@@ -1,9 +1,10 @@
-import { Request, Response } from "express";
-import { TimeoutError } from "sequelize/types";
+import { request, Request, response, Response } from "express";
+import { json, TimeoutError } from "sequelize/types";
 import { sequelize } from "../dbpostgredatabase";
-import { Usuario } from "../models/usuario.sequelize";
+import { comparePasswordFunction, Usuario } from "../models/usuario.sequelize";
 import bcrypt from "bcrypt";
-import { any } from "sequelize/types/lib/operators";
+import jwt from 'jsonwebtoken';
+
 
 export const getUsuario = async (req: Request, res: Response) => {
   try{
@@ -34,9 +35,8 @@ export const getUsuarios = async (req: Request, res: Response) =>{
 }
 export const createUsuario = async (req: Request, res: Response) => {
   let { nombre, password, apellido, email, fecha, admin } = req.body;
-  try {
-
-      
+  try {    
+   
     let newUsuario = await Usuario.create({
       nombre: nombre,
       password: password,
@@ -136,17 +136,14 @@ export const cambiarPassword = async (req: Request, res: Response)=>{
   const {id} = req.params;
   let { password } = req.body;
   try{
-
-    
       await Usuario.update({
         password:password     
       },    
       {
         where: {id},  
       });
-      
+        
        res.json({
-         password,
          message: "contraseña cambiada",
        });
   } catch(error){
@@ -156,22 +153,98 @@ export const cambiarPassword = async (req: Request, res: Response)=>{
 }
 
 export const signUp = async (req: Request, res: Response) => {
-  let{nombre,password, email,fecha} = req.body;
+  let{nombre,apellido,password, email,fecha} = req.body;
   if(!req.body.email || !req.body.password) {
     return res.status(400).json({msg: 'Por favor introduce email y contraseña'})
   }
-   const usuarioRegistrado = await Usuario.findOne({
+   let usuarioRegistrado = await Usuario.findOne({
       where:{
         email,
       }
     });
     if(usuarioRegistrado){
-      res.json({
+      return res.status(400).json({
         message:'email en uso'
       })
     }
     else{
+      try {
+        let usuarioRegistrado = await Usuario.create({
+          nombre: nombre,
+          password: password,
+          apellido: apellido,
+          email: email,
+          fecha: fecha,
+        });
 
+        if (usuarioRegistrado)
+          res.json({
+            message: "Usuario registrado correctamente"
+          });
+      } catch (error) {
+        res.status(500).json({
+          message: "usuario no registrado",
+          data: {},
+          error: error,
+        });
+      }
     }
-  res.send('recibido')
+  
 }
+
+export const signIn = async (req: Request, res: Response) =>{
+  let{email,password} = req.body;
+try{
+  if (!req.body.email || !req.body.password) {
+    return res
+      .status(400)
+      .json({ message: " por favor introduzca email y contraseña" });
+  }
+  let usuario = await Usuario.findOne({
+    where: {
+      email,
+    },
+  });
+  if(!usuario){
+    return res.status(400).json({message:'El usuario no existe'})
+  }
+  let x:boolean
+  
+  //const isMatch = await comparePasswordFunction(password,);
+   if(false){
+     return res.status(200).json({toke: createToken(usuario)})
+   }
+
+   return res.status(400).json({
+     message:'email o contraseña incorrectos'
+   })
+  
+}catch(error){
+
+}
+  
+}
+
+function createToken(user: any){
+  
+if(user instanceof Usuario){
+jwt.sign(
+  { id: user.getDataValue("id"), email: user.getDataValue("email") },
+  "tokensecreto",{
+    expiresIn:86400
+  }
+);
+}
+
+  
+}
+
+export const correctPassword = (password:string, passwordBD:string) => {
+  return new Promise((resolve) => {
+    bcrypt.compare(password, passwordBD, (err, res) => {
+      resolve(res);
+    });
+  });
+};
+
+

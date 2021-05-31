@@ -30,12 +30,14 @@ export class ArticuloComponent implements OnInit {
   }
 
   addArticulo(form: NgForm){
-    if(form.value.id){
+    if(form.value._id){
       console.log('actualizando');
       this.articuloService.updateArticulo(form.value).subscribe(
         res => console.log(res),
         err => console.error(err)
       );    
+      this.resetForm(form);
+      this.getArticulos();
     }
 
     else{
@@ -58,6 +60,7 @@ export class ArticuloComponent implements OnInit {
         },
         (err) => console.log(err)
        );
+       this.getArticulos();
       }
     }
 

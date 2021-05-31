@@ -1,4 +1,4 @@
-import mongoose,{ ConnectionOptions } from 'mongoose'
+import mongoose,{ connection, ConnectionOptions } from 'mongoose'
 
 
 (async() =>{
@@ -22,3 +22,5 @@ import mongoose,{ ConnectionOptions } from 'mongoose'
     
       
 })();
+
+export default connection;
