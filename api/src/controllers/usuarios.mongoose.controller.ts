@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import User, { IUser } from "../models/usuario.moogose";
 import jwt from "jsonwebtoken";
+import app from "../app";
+import { Session } from "node:inspector";
 
 
 function createToken(user: IUser) {
@@ -45,8 +47,8 @@ export const signIn = async (
   }
 
   const isMatch = await user.comparePassword(req.body.password);
-  if (isMatch) {
-    return res.status(200).json({ token: createToken(user) });
+  if (isMatch) {  
+    return res.status(200).json({ msg:"Logeado", token: createToken(user) });
   }
 
   return res.status(400).json({

@@ -3,7 +3,7 @@ import { adminStrategy, userStrategy } from "../middlewares/passport";
 const router = Router();
 
 import passport, { Strategy } from 'passport';
-
+/*
 router.get(
   "/admin",
   adminStrategy.authenticate("adminStrategy", { session:false, successRedirect: 'localhost:4200/lista-articulo-admin.component.html',
@@ -12,5 +12,5 @@ router.get(
     res.send("success");
   }
 );
-
+*/
 export default router;

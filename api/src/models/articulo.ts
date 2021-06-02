@@ -25,7 +25,7 @@ const articuloSchema = new Schema({
         required: true
     },
     precio: {
-        type: Schema.Types.Decimal128,
+        type: Number,
         required: true
     },
     oferta:{

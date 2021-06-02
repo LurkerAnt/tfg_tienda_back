@@ -153,7 +153,7 @@ export const cambiarPassword = async (req: Request, res: Response)=>{
 }
 
 export const signUp = async (req: Request, res: Response) => {
-  let{nombre,apellido,password, email,fecha} = req.body;
+  let{nombre,apellido,email,password,fecha} = req.body;
   if(!req.body.email || !req.body.password) {
     return res.status(400).json({msg: 'Por favor introduce email y contraseña'})
   }
