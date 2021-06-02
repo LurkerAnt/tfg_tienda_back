@@ -2,7 +2,7 @@ import { request, Request, response, Response } from "express";
 import { json, TimeoutError } from "sequelize/types";
 import { sequelize } from "../dbpostgredatabase";
 import { comparePasswordFunction, Usuario } from "../models/usuario.sequelize";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
 
 

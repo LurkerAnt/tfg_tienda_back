@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../dbpostgredatabase";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 
 export const Usuario = sequelize.define(
