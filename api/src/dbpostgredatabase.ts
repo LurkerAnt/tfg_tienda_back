@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-
+/*
 export const sequelize = new Sequelize(
     'postgres',
     'postgres',
@@ -23,4 +23,4 @@ try {
   console.log("connected to:", sequelize.getDatabaseName());
 } catch (error) {
   console.error("Unable to connect to the database:", error);
-}
+}*/

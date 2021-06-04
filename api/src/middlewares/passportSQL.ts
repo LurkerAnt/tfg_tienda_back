@@ -1,5 +1,5 @@
 
-import {Strategy, ExtractJwt, StrategyOptions} from 'passport-jwt'
+/*import {Strategy, ExtractJwt, StrategyOptions} from 'passport-jwt'
 import { Sequelize } from 'sequelize/types';
 import Usuario from '../models/usuario.sequelize';
 const opts: StrategyOptions = {
@@ -17,4 +17,4 @@ export default new Strategy(opts, async (payload, done) => {
     } catch (error) {
       console.log(error);
     }
-});
+}); */

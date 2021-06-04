@@ -1,4 +1,4 @@
-import Sequelize from "sequelize";
+/*import Sequelize from "sequelize";
 import { sequelize } from "../dbpostgredatabase";
 import bcrypt from "bcrypt";
 
@@ -88,7 +88,8 @@ Usuario.hashPassword = function(password:string) {
 
 Usuario.isValidPassword = function (password, hash) {
   return bcrypt.compareSync(hash, password);
-};*/
+};
 export default Usuario;
 
 
+*/

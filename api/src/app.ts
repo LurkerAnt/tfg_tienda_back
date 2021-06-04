@@ -4,7 +4,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import session from 'express-session'
-import passportMiddleware from './middlewares/passportSQL';
+//import passportMiddleware from './middlewares/passportSQL';
+import passportMiddleware from './middlewares/passport';
 import articulosRoutes from './routes/articulos.routes';
 import usariosRoutes from './routes/usuarios.routes';
 import adminRoutes from './routes/admin.routes'
@@ -42,7 +43,7 @@ app.use(
     },
   })
 );
-
+app.use(passport.session());
 //routes 
 app.use(articulosRoutes);
 app.use(usariosRoutes);

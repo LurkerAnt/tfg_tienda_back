@@ -1,4 +1,4 @@
-import User from "../models/usuario.moogose";
+import User from "../models/usuario.moongose";
 import { Strategy, ExtractJwt, StrategyOptions } from "passport-jwt";
 import passport from "passport";
 
