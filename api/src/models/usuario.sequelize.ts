@@ -1,6 +1,6 @@
 /*import Sequelize from "sequelize";
 import { sequelize } from "../dbpostgredatabase";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 
 
 export const Usuario = sequelize.define(
@@ -28,7 +28,7 @@ export const Usuario = sequelize.define(
         return rawValue;
       },
       set(value: string) {
-        const hash = bcrypt.hashSync(value, 8);
+        const hash = bcryptjs.hashSync(value, 8);
         this.setDataValue("password", hash);
       },
     },
@@ -71,7 +71,7 @@ export const Usuario = sequelize.define(
 
 export var comparePasswordFunction = Usuario.prototype.comparePassword = function (password: string, cb:(err: any, isMatch:boolean)=>boolean) {
   
-  bcrypt.compare(password, this.password, function  (err, isMatch): boolean  {
+  bcryptjs.compare(password, this.password, function  (err, isMatch): boolean  {
     if (err) {
       return cb(err,isMatch);
     }
@@ -83,11 +83,11 @@ export var comparePasswordFunction = Usuario.prototype.comparePassword = functio
 
 /*
 Usuario.hashPassword = function(password:string) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    return bcryptjs.hashSync(password, bcryptjs.genSaltSync(8), null);
 }
 
 Usuario.isValidPassword = function (password, hash) {
-  return bcrypt.compareSync(hash, password);
+  return bcryptjs.compareSync(hash, password);
 };
 export default Usuario;
 
