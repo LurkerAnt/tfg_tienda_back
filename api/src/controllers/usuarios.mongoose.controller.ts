@@ -52,7 +52,8 @@ export const signIn = async (
   if (isMatch) {  
     const token =  createToken(user);
     res.cookie("SESSIONID", token,{ httpOnly: true, secure: true }).send;
-    return res.status(200).json({ msg:"Logueado", token: createToken(user)});
+    console.log("logueado");
+    return res.status(200).json({token: createToken(user)});
   }
 
   return res.status(400).json({
