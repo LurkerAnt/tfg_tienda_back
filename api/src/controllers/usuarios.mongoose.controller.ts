@@ -37,6 +37,7 @@ export const signIn = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
+ 
   if (!req.body.email || !req.body.password) {
     return res
       .status(400)
@@ -62,13 +63,18 @@ export const signIn = async (
 };
 
 export const createUsuario: RequestHandler = async (req, res) => {
-  const usuariofound = await User.findOne({ nombre: req.body.email });
-  if (usuariofound)
-    return res.status(301).json({ message: "El usuario ya existe" });
-  const usuario = new User(req.body);
-  const savedusuario = await usuario.save();
-  console.log(usuario);
-  return res.json(savedusuario);
+  try{
+    const usuariofound = await User.findOne({ nombre: req.body.email });
+    if (usuariofound)
+      return res.status(301).json({ message: "El usuario ya existe" });
+    const usuario = new User(req.body);
+    const savedusuario = await usuario.save();
+    console.log(usuario);
+    return res.json(savedusuario);
+  }catch(error){
+    console.log(error);
+  }
+  
 };
 
 export const getUsuarios: RequestHandler = async (req, res) => {
@@ -91,17 +97,27 @@ export const getUsuario: RequestHandler = async (req, res) => {
 };
 
 export const updateUsuario: RequestHandler = async (req, res) => {
-  const usuarioUpdated = await User.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
-  if (!usuarioUpdated) return res.status(304).json();
-  return res.json(usuarioUpdated);
+  try{
+    const usuarioUpdated = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!usuarioUpdated) return res.status(304).json();
+    return res.json(usuarioUpdated);
+  }catch(error){
+    console.log(error);
+  }
+  
 };
 
 export const deleteUsuario: RequestHandler = async (req, res) => {
-  const usuarioFound = await User.findByIdAndDelete(req.params.id);
-  if (!usuarioFound) return res.status(204).json();
-  return res.json(usuarioFound);
+  try{
+    const usuarioFound = await User.findByIdAndDelete(req.params.id);
+    if (!usuarioFound) return res.status(204).json();
+    return res.json(usuarioFound);
+  }catch(error){
+    console.log(error);
+  }
+  
 };

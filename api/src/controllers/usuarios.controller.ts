@@ -2,7 +2,7 @@
 import { json, TimeoutError } from "sequelize/types";
 import { sequelize } from "../dbpostgredatabase";
 import { comparePasswordFunction, Usuario } from "../models/usuario.sequelize";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken';
 
 
@@ -241,7 +241,7 @@ jwt.sign(
 
 export const correctPassword = (password:string, passwordBD:string) => {
   return new Promise((resolve) => {
-    bcrypt.compare(password, passwordBD, (err, res) => {
+    bcryptjs.compare(password, passwordBD, (err, res) => {
       resolve(res);
     });
   });

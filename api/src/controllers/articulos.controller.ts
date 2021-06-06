@@ -2,13 +2,20 @@ import{RequestHandler} from 'express';
 import Articulo from '../models/articulo';
 
 export const createArticulo: RequestHandler = async (req,res) => {
-    const articulofound = await Articulo.findOne({nombre: req.body.nombre})
-    if(articulofound)
-        return res.status(301).json({message:'El articulo ya existe'})
-    const articulo = new Articulo(req.body);
-    const savedarticulo = await articulo.save();
-    console.log(articulo);
-   return res.json(savedarticulo);
+    try{
+         const articulofound = await Articulo.findOne({
+           nombre: req.body.nombre,
+         });
+         if (articulofound)
+           return res.status(301).json({ message: "El articulo ya existe" });
+         const articulo = new Articulo(req.body);
+         const savedarticulo = await articulo.save();
+         console.log(articulo);
+         return res.json(savedarticulo);
+    }catch(error){
+        
+    }
+   
 };
 export const getArticulos: RequestHandler = async (req,res) => {
     try {
@@ -30,14 +37,27 @@ export const getArticulo: RequestHandler = async(req,res) => {
 };
 
 export const updateArticulo: RequestHandler =  async(req,res) => {
-   const articuloUpdated = 
-   await Articulo.findByIdAndUpdate(req.params.id,req.body,{new:true})
-    if(!articuloUpdated) return res.status(304).json();
-  return res.json(articuloUpdated)
+    try{
+        const articuloUpdated = await Articulo.findByIdAndUpdate(
+          req.params.id,
+          req.body,
+          { new: true }
+        );
+        if (!articuloUpdated) return res.status(304).json();
+        return res.json(articuloUpdated);
+    }catch(error){
+
+    }
+   
 };
 
 export const deleteArticulo: RequestHandler = async (req,res) => {
-     const articuloFound = await Articulo.findByIdAndDelete(req.params.id)
+    try{
+    const articuloFound = await Articulo.findByIdAndDelete(req.params.id)
       if(!articuloFound) return res.status(204).json();
         return res.json(articuloFound);
+    }catch(error){
+
+    }
+     
 };
